@@ -1,1 +1,1 @@
-# Countdown of Christmas using Astro (TypeScript)
+# Countdown to Christmas using Astro (TypeScript)
