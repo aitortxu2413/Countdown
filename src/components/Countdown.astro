@@ -1,0 +1,117 @@
+---
+import { getI18N } from '@/i18n'
+
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+---
+
+<main>
+  <section
+    class='uppercase flex gap-x-1 justify-center font-semibold text-2xl mt-10'
+    data-date>
+    <div class='flex flex-col justify-center items-center'>
+      <span
+        class='text-4xl tabular-nums'
+        data-days
+        >00</span
+      >
+      <span class='text-xs text-center'>{i18n.DAYS}</span>
+    </div>
+
+    <span>:</span>
+
+    <div class='flex flex-col justify-center items-center'>
+      <span
+        class='text-4xl tabular-nums'
+        data-hours
+        >00</span
+      >
+      <span class='text-xs text-center'>{i18n.HOURS}</span>
+    </div>
+
+    <span>:</span>
+
+    <div class='flex flex-col justify-center items-center'>
+      <span
+        class='text-4xl tabular-nums'
+        data-minutes
+        >00</span
+      >
+      <span class='text-xs text-center'>{i18n.MINUTES}</span>
+    </div>
+
+    <span>:</span>
+
+    <div class='flex flex-col justify-center items-center'>
+      <span
+        class='text-4xl tabular-nums'
+        data-seconds
+        >00</span
+      >
+      <span class='text-xs text-center'>{i18n.SECONDS}</span>
+    </div>
+  </section>
+</main>
+
+<script>
+  const SECOND = 1000
+  const MINUTE = SECOND * 60
+  const HOUR = MINUTE * 60
+  const DAY = HOUR * 24
+
+  function init() {
+    let year = new Date().getFullYear()
+    let date = `${year}/12/25`
+    let timestamp = new Date(date).getTime()
+
+    const $countdown = document.querySelector('[data-date]')
+    if (!$countdown) return
+
+    const $days = $countdown.querySelector('[data-days]')
+    const $hours = $countdown.querySelector('[data-hours]')
+    const $minutes = $countdown.querySelector('[data-minutes]')
+    const $seconds = $countdown.querySelector('[data-seconds]')
+
+    const formatTime = (time: number) => {
+      return Math.floor(time).toString().padStart(2, '0')
+    }
+
+    function updateCountdown() {
+      const now = Date.now()
+      let diff = timestamp - now
+
+      if ($days instanceof HTMLElement) {
+        $days.innerText = formatTime(diff / DAY)
+      }
+
+      if ($hours instanceof HTMLElement) {
+        $hours.innerText = formatTime((diff % DAY) / HOUR)
+      }
+
+      if ($minutes instanceof HTMLElement) {
+        $minutes.innerText = formatTime((diff % HOUR) / MINUTE)
+      }
+
+      if ($seconds instanceof HTMLElement) {
+        $seconds.innerText = formatTime((diff % MINUTE) / SECOND)
+      }
+
+      function update() {
+        if (diff <= 0) {
+          year++
+          date = `${year}/12/25`
+          timestamp = new Date(date).getTime()
+          diff = timestamp - now
+        }
+      }
+
+      setInterval(update, SECOND)
+      update()
+    }
+
+    setInterval(updateCountdown, SECOND)
+    updateCountdown()
+  }
+
+  init()
+</script>

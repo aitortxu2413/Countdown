@@ -1,18 +1,23 @@
 ---
+import { getLang } from '@/i18n/utils'
 interface Props {
   title: string
+  description: string
 }
 
-const { title } = Astro.props
+const { title, description } = Astro.props
+
+const { currentLocale } = Astro
+const lang = getLang({ currentLocale })
 ---
 
 <!doctype html>
-<html lang='es'>
+<html lang={lang}>
   <head>
     <meta charset='UTF-8' />
     <meta
       name='description'
-      content='Countdown to Christmas.'
+      content={description}
     />
     <meta
       name='viewport'
