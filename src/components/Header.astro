@@ -6,17 +6,20 @@ const i18n = getI18N({ currentLocale })
 ---
 
 <header>
-  <h1 class='text-center text-5xl mt-6'>{i18n.HEADER_TITLE}</h1>
-  <nav class='absolute top-6 right-4'>
+  <nav class='absolute right-4 top-4 lg:text-2xl text-[20px]'>
     <a
       href='/'
-      class='p-3 text-2xl hover:text-[#b8b8b8]'
+      class='p-3 hover:text-[#b8b8b8]'
       >{i18n.SPANISH_LANGUAGE}</a
     >
     <a
       href='/en'
-      class='p-3 text-2xl hover:text-[#b8b8b8]'
+      class='p-3 hover:text-[#b8b8b8]'
       >{i18n.ENGLISH_LANGUAGE}</a
     >
   </nav>
+  <br class='lg:hidden' />
+  <h1 class='text-center lg:text-5xl text-4xl mt-10'>
+    {i18n.HEADER_TITLE}
+  </h1>
 </header>
