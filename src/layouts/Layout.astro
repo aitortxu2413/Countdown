@@ -35,9 +35,18 @@ const lang = getLang({ currentLocale })
   </body>
 </html>
 <style is:global>
-  html {
-    font-family: system-ui, sans-serif;
+  @font-face {
+    font-family: 'RadioCanadaBig';
+    src: url('/fonts/RadioCanadaBig-VariableFont_wght.ttf');
+  }
+
+  html,
+  body {
+    font-family: 'RadioCanadaBig', system-ui, sans-serif;
     background: #13151a;
     color: #fff;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
   }
 </style>
