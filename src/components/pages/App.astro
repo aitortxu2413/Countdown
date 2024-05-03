@@ -2,6 +2,7 @@
 import Layout from '@/layouts/Layout.astro'
 import Header from '@/components/Header.astro'
 import Countdown from '@/components/Countdown.astro'
+import Footer from '@/components/Footer.astro'
 import { getI18N } from '@/i18n'
 
 const { currentLocale } = Astro
@@ -13,4 +14,5 @@ const i18n = getI18N({ currentLocale })
   description={i18n.SEO_DESCRIPTION}>
   <Header />
   <Countdown />
+  <Footer />
 </Layout>
