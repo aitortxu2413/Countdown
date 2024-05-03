@@ -1,0 +1,19 @@
+---
+import { getI18N } from '@/i18n'
+
+const { currentLocale } = Astro
+const i18n = getI18N({ currentLocale })
+---
+
+<footer
+  class='flex justify-center p-5 absolute bottom-0 w-[100%] bg-white text-black md:text-xl text-[14px]'>
+  <span>
+    {i18n.FOOTER}<a
+      href='https://github.com/aitortxu2413'
+      target='_blank'
+      rel='noopener noreferrer'
+      class='text-blue-600 hover:text-blue-800'>
+      aitortxu2413</a
+    >
+  </span>
+</footer>
