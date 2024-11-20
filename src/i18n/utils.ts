@@ -1,8 +1,4 @@
-const LANGUAGES = {
-  ENGLISH: 'en',
-  SPANISH: 'es',
-  BASQUE: 'eus'
-}
+import { LANGUAGES } from '@/constants/i18n-languages'
 
 export const getLang = ({ currentLocale = 'es' }: { currentLocale: string | undefined }) => {
   if (currentLocale === LANGUAGES.SPANISH) return LANGUAGES.SPANISH
