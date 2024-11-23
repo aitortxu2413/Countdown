@@ -6,7 +6,10 @@ const i18n = getI18N({ currentLocale })
 ---
 
 <header>
-  <nav class='absolute right-4 top-4 lg:text-2xl text-[20px]'>
+  <h1 class='text-center lg:text-5xl text-4xl mt-16'>
+    {i18n.HEADER_TITLE}
+  </h1>
+  <nav class='absolute right-4 top-4 lg:text-2xl text-[20px] text-white'>
     <a
       href='/'
       class='p-3 hover:text-[#b8b8b8]'
@@ -23,8 +26,4 @@ const i18n = getI18N({ currentLocale })
       >{i18n.BASQUE_LANGUAGE}</a
     >
   </nav>
-  <br class='lg:hidden' />
-  <h1 class='text-center lg:text-5xl text-4xl mt-10'>
-    {i18n.HEADER_TITLE}
-  </h1>
 </header>
