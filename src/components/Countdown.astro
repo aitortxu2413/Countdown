@@ -73,59 +73,44 @@ const i18n = getI18N({ currentLocale })
   const HOUR = MINUTE * 60
   const DAY = HOUR * 24
 
-  function init() {
-    let year = new Date().getFullYear()
-    let date = `${year}/12/25`
-    let timestamp = new Date(date).getTime()
-
+  function initCountdown(): void {
+    let year: number = new Date().getFullYear();
     const $countdown = document.querySelector('[data-date]')
+
     if (!$countdown) return
 
-    const $days = $countdown.querySelector('[data-days]')
-    const $hours = $countdown.querySelector('[data-hours]')
-    const $minutes = $countdown.querySelector('[data-minutes]')
-    const $seconds = $countdown.querySelector('[data-seconds]')
+    const $days = $countdown.querySelector('[data-days]') as HTMLElement
+    const $hours = $countdown.querySelector('[data-hours]') as HTMLElement
+    const $minutes = $countdown.querySelector('[data-minutes]') as HTMLElement
+    const $seconds = $countdown.querySelector('[data-seconds]') as HTMLElement
 
-    const formatTime = (time: number) => {
-      return Math.floor(time).toString().padStart(2, '0')
-    }
+    const formatTime = (time: number): string =>
+      Math.floor(time).toString().padStart(2, '0')
 
-    function updateCountdown() {
-      const now = Date.now()
-      let diff = timestamp - now
+    const getChristmasTimestamp = (): number =>
+      new Date(`${year}/12/25`).getTime()
 
-      if ($days instanceof HTMLElement) {
-        $days.innerText = formatTime(diff / DAY)
+    let timestamp: number = getChristmasTimestamp()
+
+    function updateCountdown(): void {
+      const now: number = Date.now()
+      let diff: number = timestamp - now
+
+      if (diff <= 0) {
+        year++
+        timestamp = getChristmasTimestamp()
+        diff = timestamp - now
       }
 
-      if ($hours instanceof HTMLElement) {
-        $hours.innerText = formatTime((diff % DAY) / HOUR)
-      }
-
-      if ($minutes instanceof HTMLElement) {
-        $minutes.innerText = formatTime((diff % HOUR) / MINUTE)
-      }
-
-      if ($seconds instanceof HTMLElement) {
-        $seconds.innerText = formatTime((diff % MINUTE) / SECOND)
-      }
-
-      function update() {
-        if (diff <= 0) {
-          year++
-          date = `${year}/12/25`
-          timestamp = new Date(date).getTime()
-          diff = timestamp - now
-        }
-      }
-
-      setInterval(update, SECOND)
-      update()
+      if ($days) $days.innerText = formatTime(diff / DAY)
+      if ($hours) $hours.innerText = formatTime((diff % DAY) / HOUR)
+      if ($minutes) $minutes.innerText = formatTime((diff % HOUR) / MINUTE)
+      if ($seconds) $seconds.innerText = formatTime((diff % MINUTE) / SECOND)
     }
 
     setInterval(updateCountdown, SECOND)
     updateCountdown()
   }
 
-  init()
+  initCountdown()
 </script>
